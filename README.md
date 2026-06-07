@@ -1,60 +1,164 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📦 GestionStock
+Application web de gestion de stock développée avec Laravel — permet de gérer les produits, catégories, mouvements de stock et utilisateurs avec un tableau de bord analytique.
+# 🚀 Aperçu
+GestionStock est une application web complète permettant à une entreprise de gérer efficacement son inventaire. Elle offre une interface intuitive pour suivre les entrées/sorties de produits, gérer les employés et visualiser les statistiques de stock en temps réel.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# ✨ Fonctionnalités
 
-## About Laravel
+- 🔐 Authentification — Connexion sécurisée avec gestion des rôles (Admin / Employé)
+- 📦 Produits — Ajout, modification, suppression et consultation des produits
+- 🗂️ Catégories — Organisation des produits par catégorie
+- 🔄 Mouvements de stock — Enregistrement des entrées et sorties avec vérification du stock disponible
+- 👥 Gestion des employés — L'administrateur peut ajouter et supprimer des employés
+- 📊 Dashboard analytique — Statistiques en temps réel + graphique entrées/sorties par mois
+- ⚠️ Alertes stock faible — Notification visuelle des produits dont le stock est insuffisant
+- 🕵️ Historique des opérations — L'admin voit toutes les opérations, l'employé voit uniquement les siennes
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# 🛠️ Technologies utilisées
+| Technologie | Version |
+|---|---|
+| PHP | ^8.1 |
+| Laravel | ^10.x |
+| SQLite | — |
+| Bootstrap (SB Admin 2) | 4.x |
+| ApexCharts | CDN |
+| Font Awesome | 5.x |
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ⚙️ Installation
+ 
+### Prérequis
+ 
+- PHP >= 8.1
+- Composer
+- Node.js & NPM
+- Laragon (ou tout autre serveur local)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Étapes
+ 
+```bash
+# 1. Cloner le projet
+git clone https://github.com/votre-username/GestionStock-V2-.git
+cd GestionStock-V2-
+ 
+# 2. Installer les dépendances PHP
+composer install
+ 
+# 3. Installer les dépendances JS
+npm install && npm run dev
+ 
+# 4. Copier le fichier d'environnement
+cp .env.example .env
+ 
+# 5. Générer la clé d'application
+php artisan key:generate
+ 
+# 6. Configurer la base de données dans .env
+DB_CONNECTION=sqlite
+# Créer le fichier database/database.sqlite
+ 
+# 7. Lancer les migrations
+php artisan migrate 
+ 
+# 8. Démarrer le serveur
+php artisan serve
+```
+ 
+Accéder à l'application sur : `http://localhost:8000`
+ 
+---
 
-## Learning Laravel
+## 🗄️ Structure de la base de données
+ 
+```
+users
+├── id, name, email, password, role (admin|employe), timestamps
+ 
+categories
+├── id, nom, timestamps
+ 
+produits
+├── id, nom, quantite, categorie_id, timestamps
+ 
+mouvements
+├── id, type (entree|sortie), quantite, produit_id, user_id (nullable), user_name, timestamps
+```
+---
+ 
+## 👤 Rôles & Permissions
+ 
+| Fonctionnalité | Admin | Employé |
+|---|:---:|:---:|
+| Voir le dashboard | ✅ | ✅ |
+| Gérer les produits | ✅ | ✅ |
+| Gérer les catégories | ✅ | ✅ |
+| Faire des mouvements | ✅ | ✅ |
+| Voir toutes les opérations | ✅ | ❌ |
+| Voir ses propres opérations | ✅ | ✅ |
+| Gérer les employés | ✅ | ❌ |
+ 
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 📁 Structure du projet
+ 
+```
+gestionStock/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── DashboardController.php
+│   │   │   ├── ProduitController.php
+│   │   │   ├── CategoryController.php
+│   │   │   ├── MouvementController.php
+│   │   │   └── UserController.php
+│   │   └── Requests/
+│   ├── Models/
+│   │   ├── User.php
+│   │   ├── Produit.php
+│   │   ├── Categorie.php
+│   │   └── Mouvement.php
+├── database/
+│   └── migrations/
+├── resources/
+│   └── views/
+│       ├── template.blade.php
+│       ├── dashboard.blade.php
+│       ├── produits/
+│       ├── category/
+│       ├── mouvements/
+│       └── users/
+└── routes/
+    └── web.php
+```
+ 
+---
+ 
+## 📊 Dashboard
+ 
+Le tableau de bord affiche :
+ 
+- **4 cartes statistiques** : Total produits, catégories, employés, opérations
+- **Graphique barres** : Entrées vs Sorties sur les 12 derniers mois (ApexCharts)
+- **Alerte stock faible** : Produits avec quantité ≤ 5
+- **Dernières opérations** : Les 5 dernières avec type, produit, quantité, auteur et date
+---
+ 
+## 🔒 Sécurité
+ 
+- Mots de passe hashés avec `bcrypt`
+- Protection CSRF sur tous les formulaires
+- Régénération de session à la connexion
+- Suppression d'un employé sans impact sur l'historique de ses opérations (clé étrangère nullable + nom sauvegardé)
+---
+ 
+## 📝 Licence
+ 
+Ce projet est développé à des fins pédagogiques.
+ 
+---
+ 
+## 👨‍💻 Auteur
+ 
+Développé par **EBRO VITAL**  
+📍 Abidjan, Côte d'Ivoire
+ 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-"# GestionStock-V2-" 
