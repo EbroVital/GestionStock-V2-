@@ -15,7 +15,17 @@ class mouvementController extends Controller
      */
     public function index()
     {
-        $mouvements = Mouvement::with('product', 'user')->latest()->get();
+        $user = Auth::user();
+
+        if( $user->role === "admin" ) {
+            $mouvements = Mouvement::with('product', 'user')->latest()->get();
+        } else {
+            $mouvements = Mouvement::with('product', 'user')->where('user_id', $user->id)->latest()->get();
+
+        }
+
+        // dd($name);
+
         return view('mouvements.index', compact('mouvements'));
     }
 
@@ -54,7 +64,7 @@ class mouvementController extends Controller
             'quantite'       => $request->quantite,
             'produit_id'     => $request->produit_id,
             'user_id'        => Auth::id(),
-            'date_mouvement' => now()
+            'user_name'      => Auth::user()->name
         ]);
 
         return redirect()->route('mouvements.index')->with('message', "Opération enregistrée avec succès !");

@@ -53,9 +53,9 @@
                                                     </div>
                                                 @enderror
                                         </div>
-                                        
+
                                         <div class="form-group">
-                                            <input type="password" class="form-control @error('password')is-invalid @enderror"
+                                            <input type="password" class="form-control @error('password') is-invalid @enderror"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Entrez le nouveau mot de passe ..." name="password">
                                                 @error('password')

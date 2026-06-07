@@ -31,7 +31,14 @@
 
                                             <a href="{{route('categories.show', $category)}}" class="btn btn-warning">Voir</a>
 
-                                            <a href="{{route('categories.destroy', $category)}}" class="btn btn-danger">Supprimer</a>
+                                            <form action="{{route('categories.destroy', $category)}}" method="POST" class="d-inline" onsubmit="return confirm('Voulez-vous supprimer cette catégorie ?')">
+                                                @csrf
+                                                @method("DELETE")
+                                                <button class="btn btn-danger">
+                                                    Supprimer
+                                                </button>
+
+                                            </form>
 
                                     </td>
                                 </tr>

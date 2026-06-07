@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nom');
             $table->string('quantite');
             $table->decimal('prix',10,2);
-            $table->foreignId('categorie_id')->constrained('categories');
+            $table->foreignId('categorie_id')->constrained('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

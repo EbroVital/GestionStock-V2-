@@ -37,13 +37,29 @@
                                     <td class="text-center">
                                         {{ $product->category->libelle }}
                                     </td>
-                                    <td class="text-center">
 
-                                            <a href="{{route('products.edit', $product)}}" class="btn btn-primary">Modifier</a>
+                                    @if ( Auth::user()->role === "admin")
 
-                                            <a href="{{route('products.destroy', $product)}}" class="btn btn-danger">Supprimer</a>
+                                        <td class="text-center">
 
-                                    </td>
+                                                <a href="{{route('products.edit', $product)}}" class="btn btn-primary">Modifier</a>
+
+                                                <form action="{{ route('products.destroy', $product)}}" method="POST" class="d-inline" onsubmit="return confirm('Voulez-vous supprimer ce produit ?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger">Supprimer</button>
+                                                </form>
+
+                                        </td>
+
+                                    @else
+                                        <td class="text-center">
+                                            <small class="text-muted">
+                                                Vous n'avez pas accès aux actions
+                                            </small>
+                                        </td>
+                                    @endif
+
                                 </tr>
                             @empty
                                 <tr>

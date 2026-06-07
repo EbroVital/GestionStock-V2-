@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('mouvements', function (Blueprint $table) {
             $table->id();
             $table->enum('type',['entree','sortie']);
-            $table->string('quantite');
+            $table->integer('quantite');
             $table->foreignId('produit_id')->constrained('produits')->onDelete('restrict');
-            $table->foreignId('user_id')->constrained('users')->onDelete('restrict');
-            $table->date('date_mouvement');
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
         });
     }

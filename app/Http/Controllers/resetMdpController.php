@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
@@ -21,7 +22,6 @@ class resetMdpController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-    
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation'),
             function ($user) use ($request) {
@@ -33,9 +33,9 @@ class resetMdpController extends Controller
             }
         );
 
-        return $status == Password::PASSWORD_RESET
-                    ? redirect()->route('dashboard')->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                            ->withErrors(['email' => __($status)]);
+        return $status == Password::PASSWORD_RESET ? redirect()->route('dashboard')->with('status', __($status)) : back()->withInput($request->only('email'))->withErrors(['email' => __($status)]);
     }
+
+
+
 }

@@ -75,7 +75,7 @@ class categoryController extends Controller
     public function destroy(Category $category)
     {
         if ( $category->products()->count() > 0){
-            return redirect()->route('categories.index')->with('message', "Impossible de supprimer cette catégorie car elle contient '{$category->products()->count()}' produits");
+            return redirect()->route('categories.index')->with('error', "Impossible de supprimer cette catégorie car elle contient {$category->products()->count()} produit(s)");
         }
 
         $libelle = $category->libelle;

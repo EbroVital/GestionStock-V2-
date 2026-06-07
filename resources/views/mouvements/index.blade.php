@@ -32,7 +32,6 @@
                                                 {{ Str::ucfirst($mvmt->type) }}
                                             </span>
                                         @endif
-
                                     </td>
                                     <td class="text-center">
                                         {{ $mvmt->quantite }}
@@ -41,13 +40,14 @@
                                         {{ $mvmt->product->nom }}
                                     </td>
                                     <td class="text-center">
-                                        {{ $mvmt->user->name }}
-                                       <br> <small class="text-muted">{{ $mvmt->user->role }}</small>
+                                        {{ $mvmt->user?->name ?? $mvmt->user_name ?? 'Inconnu' }}
+                                    <br> <small class="text-muted">{{ $mvmt->user?->role ?? "Ancien employé" }}</small>
                                     </td>
                                     <td class="text-center">
-                                        {{ $mvmt->date_mouvement }}
+                                        {{ $mvmt->created_at }}
                                     </td>
                                 </tr>
+
                             @empty
                                 <tr>
                                     <td colspan="5">

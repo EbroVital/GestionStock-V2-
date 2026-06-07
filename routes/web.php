@@ -7,6 +7,7 @@ use App\Http\Controllers\mouvementController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\registerController;
 use App\Http\Controllers\resetMdpController;
+use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -39,8 +40,9 @@ Route::middleware('auth')->group(function() {
 });
 
 // Route pour les produits et les mouvements
+Route::resource('products', productController::class);
+Route::resource('mouvements', mouvementController::class);
 
-    Route::resource('products', productController::class);
-    Route::resource('mouvements', mouvementController::class);
-
-
+// Route pour la liste des employés
+Route::get('/users', [userController::class, 'index'])->name('users.index');
+Route::delete('/users/{user}', [userController::class, 'destroy'])->name('users.destroy');

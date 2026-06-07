@@ -6,7 +6,7 @@
 @section('content')
 
     <!-- Content Row -->
-                        <div class="row">
+                        {{-- <div class="row">
 
                             <!-- Earnings (Monthly) Card Example -->
                             <div class="col-xl-3 col-md-6 mb-4">
@@ -90,11 +90,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <!-- Content Row -->
 
-                        <div class="row">
+                        {{-- <div class="row">
 
                             <!-- Area Chart -->
                             <div class="col-xl-8 col-lg-7">
@@ -168,10 +168,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <!-- Content Row -->
-                        <div class="row">
+                        {{-- <div class="row">
 
                             <!-- Content Column -->
                             <div class="col-lg-6 mb-4">
@@ -321,6 +321,210 @@
                                 </div>
 
                             </div>
+                        </div> --}}
+
+
+    {{-- Cartes statistiques --}}
+    <div class="row">
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Produits</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalProduits }}</div>
                         </div>
+                        <div class="col-auto"><i class="fas fa-box fa-2x text-gray-300"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Catégories</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalCategories }}</div>
+                        </div>
+                        <div class="col-auto"><i class="fas fa-tags fa-2x text-gray-300"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Employés</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalEmployes }}</div>
+                        </div>
+                        <div class="col-auto"><i class="fas fa-users fa-2x text-gray-300"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Opérations</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalMouvements }}</div>
+                        </div>
+                        <div class="col-auto"><i class="fas fa-exchange-alt fa-2x text-gray-300"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {{-- Graphique + Produits stock faible --}}
+    <div class="row">
+
+        {{-- Graphique entrées/sorties --}}
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Entrées / Sorties par mois</h6>
+                </div>
+                <div class="card-body">
+                    <div id="mouvementsChart"></div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Produits stock faible --}}
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-danger">⚠️ Stock faible </h6>
+                </div>
+                <div class="card-body">
+                    @forelse ($produitsFaibles as $produit)
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>{{ $produit->nom }}</span>
+                            <span class="badge badge-danger">{{ $produit->quantite }} restant(s)</span>
+                        </div>
+                    @empty
+                        <p class="text-success text-center">Tous les stocks sont suffisants ✅</p>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {{-- Dernières opérations --}}
+    <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Dernières opérations</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Type</th>
+                                <th class="text-center">Produit</th>
+                                <th class="text-center">Quantité</th>
+                                <th class="text-center">Effectué par</th>
+                                <th class="text-center">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($derniersMovements as $mvmt)
+                                <tr>
+                                    <td class="text-center">
+                                        @if ($mvmt->type === 'entree')
+                                            <span class="badge badge-success">Entrée</span>
+                                        @else
+                                            <span class="badge badge-danger">Sortie</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">{{ $mvmt->product->nom ?? 'Produit supprimé' }}</td>
+                                    <td class="text-center">{{ $mvmt->quantite }}</td>
+                                    <td class="text-center">{{ $mvmt->user?->name ?? $mvmt->user_name ?? 'Inconnu' }}
+                                        <br><small class="text-muted">{{ $mvmt->user?->role ?? "Ancien employé" }}</small>
+                                    </td>
+                                    <td class="text-center">{{ $mvmt->created_at }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted">Aucune opération</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </div>
+
 
 @endsection
+
+ {{-- Chart.js --}}
+
+@section('scripts')
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        var options = {
+            chart: {
+                type: 'bar',
+                height: 350,
+                toolbar: { show: false }
+            },
+            series: [
+                {
+                    name: 'Entrées',
+                    data: @json($entrees)
+                },
+                {
+                    name: 'Sorties',
+                    data: @json($sorties)
+                }
+            ],
+            xaxis: {
+                categories: @json($mois)
+            },
+            yaxis: {
+                min: 0,
+                forceNiceScale: true,
+                labels: {
+                    formatter: function(val) {
+                        return Math.round(val);
+                    }
+                }
+            },
+            colors: ['#1cc88a', '#e74a3b'],
+            plotOptions: {
+                bar: {
+                    borderRadius: 0,
+                    columnWidth: '80%',
+                }
+            },
+            dataLabels: { enabled: false },
+            legend: { position: 'top' },
+            tooltip: {
+                y: {
+                    formatter: function(val) {
+                        return val + " unités";
+                    }
+                }
+            }
+        };
+
+        var chart = new ApexCharts(document.getElementById('mouvementsChart'), options);
+        chart.render();
+    </script>
+
+@endsection
+
+

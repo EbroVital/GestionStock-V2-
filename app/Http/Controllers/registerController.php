@@ -32,9 +32,9 @@ class registerController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('message', "Enregistrement éffectué, vous êtes connecté !");
 
     }
 
-    
+
 }
