@@ -1,20 +1,20 @@
-# 📦 GestionStock
+#  GestionStock
 Application web de gestion de stock développée avec Laravel — permet de gérer les produits, catégories, mouvements de stock et utilisateurs avec un tableau de bord analytique.
-# 🚀 Aperçu
+#  Aperçu
 GestionStock est une application web complète permettant à une entreprise de gérer efficacement son inventaire. Elle offre une interface intuitive pour suivre les entrées/sorties de produits, gérer les employés et visualiser les statistiques de stock en temps réel.
 
-# ✨ Fonctionnalités
+#  Fonctionnalités
 
-- 🔐 Authentification — Connexion sécurisée avec gestion des rôles (Admin / Employé)
-- 📦 Produits — Ajout, modification, suppression et consultation des produits
-- 🗂️ Catégories — Organisation des produits par catégorie
-- 🔄 Mouvements de stock — Enregistrement des entrées et sorties avec vérification du stock disponible
-- 👥 Gestion des employés — L'administrateur peut ajouter et supprimer des employés
-- 📊 Dashboard analytique — Statistiques en temps réel + graphique entrées/sorties par mois
-- ⚠️ Alertes stock faible — Notification visuelle des produits dont le stock est insuffisant
-- 🕵️ Historique des opérations — L'admin voit toutes les opérations, l'employé voit uniquement les siennes
+-  Authentification — Connexion sécurisée avec gestion des rôles (Admin / Employé)
+-  Produits — Ajout, modification, suppression et consultation des produits
+-  Catégories — Organisation des produits par catégorie
+-  Mouvements de stock — Enregistrement des entrées et sorties avec vérification du stock disponible
+-  Gestion des employés — L'administrateur peut ajouter et supprimer des employés
+-  Dashboard analytique — Statistiques en temps réel + graphique entrées/sorties par mois
+-  Alertes stock faible — Notification visuelle des produits dont le stock est insuffisant
+-  Historique des opérations — L'admin voit toutes les opérations, l'employé voit uniquement les siennes
 
-# 🛠️ Technologies utilisées
+#  Technologies utilisées
 | Technologie | Version |
 |---|---|
 | PHP | ^8.1 |
@@ -24,7 +24,7 @@ GestionStock est une application web complète permettant à une entreprise de g
 | ApexCharts | CDN |
 | Font Awesome | 5.x |
 
-## ⚙️ Installation
+##  Installation
  
 ### Prérequis
  
@@ -67,7 +67,7 @@ Accéder à l'application sur : `http://localhost:8000`
  
 ---
 
-## 🗄️ Structure de la base de données
+##  Structure de la base de données
  
 ```
 users
@@ -84,7 +84,7 @@ mouvements
 ```
 ---
  
-## 👤 Rôles & Permissions
+##  Rôles & Permissions
  
 | Fonctionnalité | Admin | Employé |
 |---|:---:|:---:|
@@ -97,8 +97,22 @@ mouvements
 | Gérer les employés | ✅ | ❌ |
  
 ---
+## Capture d'ecran
+- Dashboard Admin
+<img width="1366" height="768" alt="admin" src="https://github.com/user-attachments/assets/a976f842-3c59-4019-a27e-1874576ae6e1" />
+<img width="1366" height="768" alt="admin(1)" src="https://github.com/user-attachments/assets/99024102-89e6-40bc-be4f-290baee98e92" />
+- Ajout de catégorie
+<img width="1366" height="768" alt="cat" src="https://github.com/user-attachments/assets/f1a4badf-72bd-48e1-9c48-78c5a34f4300" />
+- Ajout de produit
+<img width="1366" height="768" alt="prod" src="https://github.com/user-attachments/assets/292525dc-0f2c-4b95-ad75-25c6e753ce9b" />
+- Faire une nouvelle opération
+<img width="1366" height="768" alt="op" src="https://github.com/user-attachments/assets/2e5f4de3-cc72-4e6e-a1b3-32162e6f46f1" />
 
-## 📁 Structure du projet
+
+
+----
+
+##  Structure du projet
  
 ```
 gestionStock/
@@ -132,7 +146,7 @@ gestionStock/
  
 ---
  
-## 📊 Dashboard
+##  Dashboard
  
 Le tableau de bord affiche :
  
@@ -142,7 +156,7 @@ Le tableau de bord affiche :
 - **Dernières opérations** : Les 5 dernières avec type, produit, quantité, auteur et date
 ---
  
-## 🔒 Sécurité
+##  Sécurité
  
 - Mots de passe hashés avec `bcrypt`
 - Protection CSRF sur tous les formulaires
@@ -150,13 +164,13 @@ Le tableau de bord affiche :
 - Suppression d'un employé sans impact sur l'historique de ses opérations (clé étrangère nullable + nom sauvegardé)
 ---
  
-## 📝 Licence
+##  Licence
  
 Ce projet est développé à des fins pédagogiques.
  
 ---
  
-## 👨‍💻 Auteur
+##  Auteur
  
 Développé par **EBRO VITAL**  
 📍 Abidjan, Côte d'Ivoire
