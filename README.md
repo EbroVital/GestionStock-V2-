@@ -1,4 +1,10 @@
 #  GestionStock
+![PHP](https://img.shields.io/badge/PHP-8.1-lightgrey?style=for-the-badge&logo=PHP)
+![LARAVEL](https://img.shields.io/badge/LARAVEL-10.X-red?style=for-the-badge&logo=LARAVEL)
+![SQLITE](https://img.shields.io/badge/SQLITE-X-lightgrey?style=for-the-badge&logo=SQLITE)
+![BOOTSTRAP](https://img.shields.io/badge/BOOTSTRAP-4.X-blue?style=for-the-badge&logo=BOOTSTRAP)
+![FONT AWESOME](https://img.shields.io/badge/FONT%20AWESOME-5.X-brightgreen?style=for-the-badge&logo=FONTAWESOME)
+
 Application web de gestion de stock développée avec Laravel — permet de gérer les produits, catégories, mouvements de stock et utilisateurs avec un tableau de bord analytique.
 #  Aperçu
 GestionStock est une application web complète permettant à une entreprise de gérer efficacement son inventaire. Elle offre une interface intuitive pour suivre les entrées/sorties de produits, gérer les employés et visualiser les statistiques de stock en temps réel.
@@ -173,6 +179,6 @@ Ce projet est développé à des fins pédagogiques.
 ##  Auteur
  
 Développé par **EBRO VITAL**  
-📍 Abidjan, Côte d'Ivoire
+Abidjan, Côte d'Ivoire
  
 
